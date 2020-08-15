@@ -29,6 +29,7 @@ function generateEmployee(data) {
           <img src="${image}" alt>
           <div class="employee-details">
             <h2>${firstName} ${lastName}</h2>
+            <p>${email}</p>
             <p>${location}</p>
           </div>
         </div>
