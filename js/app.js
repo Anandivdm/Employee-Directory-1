@@ -12,10 +12,10 @@ fetch('https://randomuser.me/api/?results=12')
   .then(generateEmployee)
 
 
-// Function
+// Functions
 
 function generateEmployee(data) {
-  let employees = data;
+  employees = data;
   let employeeHTML = '';
   employees.forEach((employee, index) => {
     let image = employee.picture.large
@@ -29,7 +29,6 @@ function generateEmployee(data) {
           <img src="${image}" alt>
           <div class="employee-details">
             <h2>${firstName} ${lastName}</h2>
-            <p>${email}</p>
             <p>${location}</p>
           </div>
         </div>
@@ -39,12 +38,31 @@ function generateEmployee(data) {
 };
 
 function showModal(index) {
-  console.log(index)
-  console.log(employees[index])
+  let employee = employees[index]
+  console.log(employee)
+  let image = employee.picture.large
+  let firstName = employee.name.first
+  let lastName = employee.name.last
+  let email = employee.email
+  let city = employee.location.city
+  let address = employee.location
+  let phone = employee.phone
+  let birthday = new Date(employee.dob.date);
+
+
   let modalHTML;
 
   modalHTML = `
-  <p>Hello</p>
+    <div class="employee-details">
+      <img src="${image}" alt>
+      <h2>${firstName} ${lastName}</h2>
+      <p>${email}</p>
+      <p>${city}</p>
+      <hr>
+      <p>${phone}</p>
+      <p>${address.street.number} ${address.street.name}, ${address.state} ${address.postcode}</p>
+      <p>Birthday: ${birthday.getMonth()} / ${birthday.getDay()} / ${birthday.getFullYear()} </p>
+    </div>
   `
   modalDetails.innerHTML = modalHTML;
 }
@@ -61,14 +79,3 @@ employeeCards.addEventListener(('click'), e => {
 closeModal.addEventListener(('click'), e => {
   overlay.style.display = 'none';
 })
-
-{/* <div class="employee-details">
-      <h2>${firstName} ${lastName}</h2>
-      <p>hello</p>
-      <p>${location}</p>
-      <hr>
-        <p>${phone}</p>
-        <p>${location}</p>
-        <p>Birthday: ${dob}</p>
-    </div> */}
-
